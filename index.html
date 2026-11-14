@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lamest Games — hobby games that are better than the name suggests</title>
+<meta name="description" content="Lamest Games: free, open-source hobby games built with AI. Ultra Ultralights and Neon Wars, playable in your browser.">
+<meta property="og:title" content="Lamest Games">
+<meta property="og:description" content="Free, open-source browser games. The name is a joke. The games aren't.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20200%20200%22%3E%20%3Cg%20transform%3D%22translate%28100%20104%29%20rotate%28-8%29%22%3E%20%3Cpath%20d%3D%22M-78%20-34%20Q-82%20-50%20-60%20-50%20L60%20-50%20Q82%20-50%2078%20-34%20L90%2030%20Q96%2062%2066%2058%20Q48%2056%2036%2030%20L-36%2030%20Q-48%2056%20-66%2058%20Q-96%2062%20-90%2030%20Z%22%20fill%3D%22%23ffd23f%22%20stroke%3D%22%231a1033%22%20stroke-width%3D%229%22%20stroke-linejoin%3D%22round%22/%3E%20%3Cpath%20d%3D%22M-50%20-24%20h10%20v-10%20h10%20v10%20h10%20v10%20h-10%20v10%20h-10%20v-10%20h-10%20z%22%20fill%3D%22%231a1033%22/%3E%20%3Cpath%20d%3D%22M26%20-22%20A12%2012%200%200%200%2050%20-22%20Z%22%20fill%3D%22%231a1033%22/%3E%20%3Cline%20x1%3D%2224%22%20y1%3D%22-22%22%20x2%3D%2252%22%20y2%3D%22-22%22%20stroke%3D%22%231a1033%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22/%3E%20%3Cpath%20d%3D%22M4%2014%20q4%2012%2012%206%20q2%20-6%20-2%20-8%20z%22%20fill%3D%22%23ff7aa8%22%20stroke%3D%22%231a1033%22%20stroke-width%3D%223%22%20stroke-linejoin%3D%22round%22/%3E%3Cpath%20d%3D%22M-24%206%20Q-12%2022%200%2014%20Q10%208%2022%2012%22%20fill%3D%22none%22%20stroke%3D%22%231a1033%22%20stroke-width%3D%227%22%20stroke-linecap%3D%22round%22/%3E%20%3C/g%3E%20%3C/svg%3E" type="image/svg+xml">
+<style>
+  :root{
+    --bg:#0f0a24; --bg2:#1a1033; --card:#21163f; --ink:#f4f1ff; --muted:#a9a3cc;
+    --yellow:#ffd23f; --pink:#ff4fa3; --cyan:#5ee7ff; --green:#7dff9b;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.6;
+    background-image:radial-gradient(circle at 15% 0%,#2b1a5c 0,transparent 45%),
+      radial-gradient(circle at 90% 30%,#3a1240 0,transparent 40%);
+    background-attachment:fixed}
+  a{color:var(--cyan)}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+
+  header{padding:56px 0 24px;text-align:center}
+  header .logo{width:min(560px,92%);height:auto;display:block;margin:0 auto}
+  .tag{font-size:clamp(1.1rem,2.4vw,1.45rem);margin:12px auto 0;max-width:640px}
+  .tag b{color:var(--yellow)}
+  .sub{color:var(--muted);margin:6px 0 0;font-size:.98rem}
+  nav{margin-top:22px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+  nav a{color:var(--ink);text-decoration:none;border:2px solid #3b2d6b;padding:6px 16px;border-radius:999px;font-weight:600;font-size:.92rem}
+  nav a:hover{border-color:var(--yellow);color:var(--yellow)}
+
+  h2{font-family:"Arial Black",Impact,sans-serif;font-size:1.7rem;letter-spacing:.04em;margin:56px 0 6px}
+  h2 small{display:block;font-family:system-ui,sans-serif;font-size:.95rem;font-weight:400;color:var(--muted);letter-spacing:0}
+
+  .games{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:28px;margin-top:22px}
+  .game{background:var(--card);border:3px solid #33255f;border-radius:18px;overflow:hidden;display:flex;flex-direction:column;
+    transition:transform .15s,border-color .15s,box-shadow .15s}
+  .game:hover{transform:translateY(-4px) rotate(-.4deg);border-color:var(--accent);box-shadow:0 12px 40px -12px var(--accent)}
+  .game svg{display:block;width:100%;height:auto}
+  .body{padding:20px 22px 24px;display:flex;flex-direction:column;flex:1}
+  .game h3{margin:0;font-family:"Arial Black",Impact,sans-serif;font-size:1.45rem;color:var(--accent)}
+  .genre{color:var(--muted);font-size:.9rem;margin:2px 0 12px}
+  .chips{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 18px;padding:0;list-style:none}
+  .chips li{font-size:.78rem;font-weight:600;background:#2e2257;border:1px solid #44357c;padding:3px 10px;border-radius:999px}
+  .play{margin-top:auto;display:inline-block;text-align:center;background:var(--accent);color:#120b28;font-weight:800;
+    text-decoration:none;padding:12px 18px;border-radius:12px;font-size:1.02rem;letter-spacing:.02em}
+  .play:hover{filter:brightness(1.1)}
+  .src{display:block;text-align:center;margin-top:10px;font-size:.85rem}
+  .soon{border-style:dashed;justify-content:center;align-items:center;text-align:center;padding:40px 24px;color:var(--muted);min-height:260px}
+  .soon:hover{transform:none;box-shadow:none;border-color:#33255f}
+  .soon .big{font-size:2.6rem;line-height:1}
+
+  .about{display:grid;grid-template-columns:120px 1fr;gap:24px;align-items:start;background:var(--bg2);
+    border:3px solid #33255f;border-radius:18px;padding:26px;margin-top:20px}
+  .about .mascot{width:120px;height:120px}
+  .about p{margin:0 0 10px}
+  .oss{background:var(--bg2);border:3px solid #33255f;border-radius:18px;padding:26px;margin-top:20px}
+  .oss p{margin:0 0 10px}
+  .badge{display:inline-block;font-family:"Courier New",monospace;font-weight:700;background:#123b2a;color:var(--green);
+    border:1px solid #2c7a52;padding:2px 10px;border-radius:6px}
+  @media (max-width:560px){.about{grid-template-columns:1fr;text-align:center}.about .mascot{margin:0 auto}}
+
+  footer{text-align:center;color:var(--muted);font-size:.85rem;padding:56px 0 40px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <svg class="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 200" role="img" aria-labelledby="t">
+  <title id="t">Lamest Games</title>
+  <defs>
+    <linearGradient id="pad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffd23f"/>
+      <stop offset="1" stop-color="#f59e0b"/>
+    </linearGradient>
+  </defs>
+  <!-- slightly tilted, slightly sad controller -->
+  <g transform="translate(100 100) rotate(-8)">
+    <path d="M-78 -34 Q-82 -50 -60 -50 L60 -50 Q82 -50 78 -34 L90 30 Q96 62 66 58 Q48 56 36 30 L-36 30 Q-48 56 -66 58 Q-96 62 -90 30 Z"
+          fill="url(#pad)" stroke="#1a1033" stroke-width="7" stroke-linejoin="round"/>
+    <!-- d-pad eye -->
+    <path d="M-50 -24 h10 v-10 h10 v10 h10 v10 h-10 v10 h-10 v-10 h-10 z" fill="#1a1033"/>
+    <!-- button eye, half-lidded -->
+    <path d="M26 -22 A12 12 0 0 0 50 -22 Z" fill="#1a1033"/>
+    <line x1="24" y1="-22" x2="52" y2="-22" stroke="#1a1033" stroke-width="5" stroke-linecap="round"/>
+    <!-- meh mouth -->
+    <path d="M4 14 q4 12 12 6 q2 -6 -2 -8 z" fill="#ff7aa8" stroke="#1a1033" stroke-width="3" stroke-linejoin="round"/><path d="M-24 6 Q-12 22 0 14 Q10 8 22 12" fill="none" stroke="#1a1033" stroke-width="6" stroke-linecap="round"/>
+    <!-- sweat drop -->
+    <path d="M70 -62 q8 12 0 18 q-8 -6 0 -18z" fill="#5ee7ff" stroke="#1a1033" stroke-width="3"/>
+  </g>
+  <text x="210" y="98" font-family="'Arial Black','Helvetica Neue',Impact,sans-serif" font-weight="900"
+        font-size="72" fill="#ffd23f" stroke="#1a1033" stroke-width="3" paint-order="stroke">LAMEST</text>
+  <text x="212" y="160" font-family="'Arial Black','Helvetica Neue',Impact,sans-serif" font-weight="900"
+        font-size="58" letter-spacing="9" fill="#ff4fa3" stroke="#1a1033" stroke-width="3" paint-order="stroke">GAMES</text>
+  <text x="520" y="160" font-family="'Courier New',monospace" font-size="18" fill="#9aa0c8">™-ish</text>
+</svg>
+  <p class="tag">The name is a joke. <b>The games aren't.</b></p>
+  <p class="sub">Free, open-source browser games made as a hobby — no installs, no accounts, no ads.</p>
+  <nav><a href="#games">Games</a><a href="#about">The Dev</a><a href="#open-source">Open Source</a></nav>
+</header>
+
+<main>
+<section id="games">
+  <h2>The Games <small>Click and play. Each one runs right in your browser.</small></h2>
+  <div class="games">
+
+    <article class="game" style="--accent:var(--yellow)">
+      <svg viewBox="0 0 400 200" aria-hidden="true">
+        <defs><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff9a5a"/><stop offset=".6" stop-color="#ffd27a"/><stop offset="1" stop-color="#ffe9b0"/></linearGradient></defs>
+        <rect width="400" height="200" fill="url(#sky)"/>
+        <circle cx="320" cy="62" r="26" fill="#fff4cf"/>
+        <path d="M0 150 Q60 110 120 140 T240 130 T400 120 V200 H0Z" fill="#6b8f5a"/>
+        <path d="M0 175 Q80 145 170 168 T400 160 V200 H0Z" fill="#3f6b45"/>
+        <circle cx="300" cy="150" r="5" fill="#ff4fa3"/><circle cx="350" cy="140" r="5" fill="#ff4fa3"/>
+        <g transform="translate(160 78) rotate(-6)" stroke="#1a1033" stroke-width="3" stroke-linejoin="round">
+          <path d="M-70 0 L70 0 L60 -8 L-60 -8Z" fill="#ff4fa3"/>
+          <line x1="0" y1="0" x2="-6" y2="28" /><line x1="0" y1="0" x2="14" y2="28"/>
+          <rect x="-14" y="26" width="34" height="10" rx="4" fill="#ffd23f"/>
+          <line x1="20" y1="31" x2="56" y2="31"/>
+          <path d="M50 22 L60 31 L50 40Z" fill="#5ee7ff"/>
+          <circle cx="-8" cy="38" r="4" fill="#1a1033"/><circle cx="16" cy="38" r="4" fill="#1a1033"/>
+        </g>
+        <path d="M40 70 q30 -6 60 0" stroke="#fff" stroke-width="3" fill="none" opacity=".7" stroke-dasharray="6 6"/>
+      </svg>
+      <div class="body">
+        <h3>Ultra Ultralights</h3>
+        <p class="genre">Ultralight flying · racing · combat · free flight</p>
+        <p>Strap into a lawn chair with wings and take to the sky. Race friends through courses, chase a spot on the time-trial leaderboard, team up against AI in co-op combat, or settle things in a PvP dogfight. Or just fly around and look at stuff.</p>
+        <ul class="chips"><li>Multiplayer racing</li><li>Time trials + leaderboard</li><li>Co-op combat</li><li>PvP dogfights</li><li>Free flight</li></ul>
+        <a class="play" href="https://etownson.github.io/ultralight-racing/">▶ Play Ultra Ultralights</a>
+        <a class="src" href="https://github.com/etownson/ultralight-racing">View source on GitHub</a>
+      </div>
+    </article>
+
+    <article class="game" style="--accent:var(--pink)">
+      <svg viewBox="0 0 400 200" aria-hidden="true">
+        <rect width="400" height="200" fill="#07040f"/>
+        <g stroke="#1d1640" stroke-width="1">
+          <path d="M0 25H400M0 50H400M0 75H400M0 100H400M0 125H400M0 150H400M0 175H400"/>
+          <path d="M25 0V200M75 0V200M125 0V200M175 0V200M225 0V200M275 0V200M325 0V200M375 0V200"/>
+        </g>
+        <g fill="none" stroke-width="3" style="filter:drop-shadow(0 0 6px currentColor)">
+          <g color="#5ee7ff" stroke="#5ee7ff"><path d="M200 88 L214 112 L200 106 L186 112Z"/></g>
+          <g color="#ff4fa3" stroke="#ff4fa3"><rect x="70" y="40" width="22" height="22" transform="rotate(45 81 51)"/><rect x="310" y="140" width="18" height="18" transform="rotate(30 319 149)"/></g>
+          <g color="#7dff9b" stroke="#7dff9b"><path d="M300 40 l14 0 l7 12 l-7 12 l-14 0 l-7 -12z"/><circle cx="90" cy="150" r="11"/></g>
+          <g color="#ffd23f" stroke="#ffd23f"><path d="M150 150 l10 -18 l10 18z"/><path d="M250 60 l10 -18 l10 18z"/></g>
+        </g>
+        <g stroke="#fff" stroke-width="3" stroke-linecap="round"><line x1="208" y1="84" x2="236" y2="58"/><line x1="244" y1="51" x2="262" y2="34"/><line x1="214" y1="92" x2="246" y2="74"/></g>
+        <g fill="#ffd23f"><circle cx="120" cy="100" r="2"/><circle cx="130" cy="92" r="2"/><circle cx="112" cy="110" r="2"/><circle cx="138" cy="104" r="2"/></g>
+      </svg>
+      <div class="body">
+        <h3>Neon Wars</h3>
+        <p class="genre">Twin-stick shooter · inspired by Geometry Wars</p>
+        <p>A glowing arena, an ever-growing swarm of angry geometry, and you in a tiny ship with a big gun. Move with one stick, shoot with the other, and survive as long as you can. Then do it again, because your name isn't high enough on the leaderboard yet.</p>
+        <ul class="chips"><li>Twin-stick controls</li><li>Endless waves</li><li>Global leaderboard</li></ul>
+        <a class="play" href="https://etownson.github.io/neon-wars/">▶ Play Neon Wars</a>
+        <a class="src" href="https://github.com/etownson/neon-wars">View source on GitHub</a>
+      </div>
+    </article>
+
+    <article class="game soon">
+      <div>
+        <div class="big">🛠️</div>
+        <h3 style="color:var(--muted);margin-top:10px">More on the way</h3>
+        <p>The next lame game is under construction. Check back — the list keeps growing.</p>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<section id="about">
+  <h2>The Dev <small>Who's responsible for all this.</small></h2>
+  <div class="about">
+    <svg class="mascot" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <g transform="translate(100 104) rotate(-8)">
+    <path d="M-78 -34 Q-82 -50 -60 -50 L60 -50 Q82 -50 78 -34 L90 30 Q96 62 66 58 Q48 56 36 30 L-36 30 Q-48 56 -66 58 Q-96 62 -90 30 Z"
+          fill="#ffd23f" stroke="#1a1033" stroke-width="9" stroke-linejoin="round"/>
+    <path d="M-50 -24 h10 v-10 h10 v10 h10 v10 h-10 v10 h-10 v-10 h-10 z" fill="#1a1033"/>
+    <path d="M26 -22 A12 12 0 0 0 50 -22 Z" fill="#1a1033"/>
+    <line x1="24" y1="-22" x2="52" y2="-22" stroke="#1a1033" stroke-width="5" stroke-linecap="round"/>
+    <path d="M4 14 q4 12 12 6 q2 -6 -2 -8 z" fill="#ff7aa8" stroke="#1a1033" stroke-width="3" stroke-linejoin="round"/><path d="M-24 6 Q-12 22 0 14 Q10 8 22 12" fill="none" stroke="#1a1033" stroke-width="7" stroke-linecap="round"/>
+  </g>
+</svg>
+    <div>
+      <p><b style="color:var(--yellow)">Lamest Gamer</b> has 30+ years of experience as an entrepreneurial software developer — building products, companies, and the occasional thing that actually shipped on time.</p>
+      <p>Lamest Games is what happens when that experience meets free time and modern AI coding tools. Every game here is built with AI as a development partner, then played, tuned, and polished until it's genuinely fun. It's a hobby, so the name keeps expectations low. The games are there to beat them.</p>
+    </div>
+  </div>
+</section>
+
+<section id="open-source">
+  <h2>Open Source <small>Peek under the hood. Borrow what you like.</small></h2>
+  <div class="oss">
+    <p>All Lamest Games are open source under the <span class="badge">MIT License</span>. Read the code, learn from it, fork it, mod it, or use it in your own projects. Just keep the copyright notice and license text with any copies.</p>
+    <p>Found a bug or have an idea? Drop it in the <a href="https://github.com/etownson/lamest-games/discussions">Lamest Games discussions</a>. It's a hobby, so no promises, but it all gets read.</p>
+  </div>
+</section>
+</main>
+
+<footer>
+  © <span id="y">2026</span> Lamest Games · Made with questionable judgment and excellent tools ·
+  <a href="https://github.com/etownson/lamest-games">Site source</a>
+</footer>
+</div>
+<script>document.getElementById('y').textContent=new Date().getFullYear();</script>
+</body>
+</html>

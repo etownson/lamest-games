@@ -11,7 +11,7 @@ Live at **https://etownson.github.io/lamest-games/**
 
 ## Videos
 - [Hyperbolic Holdings](https://youtu.be/mhf4RhrtxsY) — satirical animated explainer
-- [Fire Together](https://youtu.be/xicAxmIlMpA) — AI mini-documentary
+- [Fire Together](https://youtu.be/xicAxmIlMpA) — a brief history of thinking machines (17-min animated documentary)
 
 Bugs and ideas: [Discussions](https://github.com/etownson/lamest-games/discussions)
 

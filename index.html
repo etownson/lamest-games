@@ -54,6 +54,20 @@
   .soon:hover{transform:none;box-shadow:none;border-color:#33255f}
   .soon .big{font-size:2.6rem;line-height:1}
 
+  .videos{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:28px;margin-top:22px}
+  .video{background:var(--card);border:3px solid #33255f;border-radius:18px;overflow:hidden;display:flex;flex-direction:column;
+    transition:border-color .15s,box-shadow .15s}
+  .video:hover{border-color:var(--accent);box-shadow:0 12px 40px -12px var(--accent)}
+  .video h3{margin:0;font-family:"Arial Black",Impact,sans-serif;font-size:1.45rem;color:var(--accent)}
+  .player{position:relative;aspect-ratio:16/9;background:#000;border-bottom:3px solid #33255f}
+  .player iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+  .player button{position:absolute;inset:0;width:100%;height:100%;padding:0;border:0;cursor:pointer;background:#000}
+  .player button img{width:100%;height:100%;object-fit:cover;display:block;opacity:.85;transition:opacity .15s}
+  .player button:hover img{opacity:1}
+  .player button span{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:74px;height:52px;border-radius:14px;
+    background:var(--accent);color:#120b28;font-size:1.6rem;display:grid;place-items:center;box-shadow:0 6px 24px rgba(0,0,0,.5)}
+  .watch{display:block;text-align:center;margin-top:auto;padding-top:10px;font-size:.85rem}
+
   .about{display:grid;grid-template-columns:120px 1fr;gap:24px;align-items:start;background:var(--bg2);
     border:3px solid #33255f;border-radius:18px;padding:26px;margin-top:20px}
   .about .mascot{width:120px;height:120px}
@@ -101,7 +115,7 @@
 </svg>
   <p class="tag">The name is a joke. <b>The games aren't.</b></p>
   <p class="sub">Free, open-source browser games made as a hobby — no installs, no accounts, no ads.</p>
-  <nav><a href="#games">Games</a><a href="#about">The Dev</a><a href="#open-source">Open Source</a></nav>
+  <nav><a href="#games">Games</a><a href="#videos">Videos</a><a href="#about">The Dev</a><a href="#open-source">Open Source</a></nav>
 </header>
 
 <main>
@@ -144,6 +158,45 @@
   </div>
 </section>
 
+<section id="videos">
+  <h2>The Videos <small>Not games, but made the same way: with AI and too much free time.</small></h2>
+  <div class="videos">
+
+    <article class="video" style="--accent:var(--cyan)">
+      <div class="player" data-yt="mhf4RhrtxsY">
+        <button type="button" aria-label="Play Hyperbolic Holdings">
+          <img src="https://i.ytimg.com/vi/mhf4RhrtxsY/hqdefault.jpg" width="480" height="360" loading="lazy" alt="">
+          <span aria-hidden="true">▶</span>
+        </button>
+      </div>
+      <div class="body">
+        <h3>Hyperbolic Holdings</h3>
+        <p class="genre">Satirical animated explainer</p>
+        <p>An investor pitch for a company that doesn't exist, grown out of three increasingly unhinged prompts to Claude. Every claim is bigger than the last. None of them should be believed.</p>
+        <ul class="chips"><li>Satire</li><li>Animated</li><li>AI voiceover</li></ul>
+        <a class="watch" href="https://youtu.be/mhf4RhrtxsY">Watch on YouTube</a>
+      </div>
+    </article>
+
+    <article class="video" style="--accent:var(--green)">
+      <div class="player" data-yt="xicAxmIlMpA">
+        <button type="button" aria-label="Play Fire Together">
+          <img src="https://i.ytimg.com/vi/xicAxmIlMpA/hqdefault.jpg" width="480" height="360" loading="lazy" alt="">
+          <span aria-hidden="true">▶</span>
+        </button>
+      </div>
+      <div class="body">
+        <h3>Fire Together</h3>
+        <p class="genre">AI mini-documentary</p>
+        <p>A short documentary made in collaboration with Claude. Small in runtime, not in subject.</p>
+        <ul class="chips"><li>Mini-doc</li><li>Made with Claude</li></ul>
+        <a class="watch" href="https://youtu.be/xicAxmIlMpA">Watch on YouTube</a>
+      </div>
+    </article>
+
+  </div>
+</section>
+
 <section id="about">
   <h2>The Dev <small>Who's responsible for all this.</small></h2>
   <div class="about">
@@ -178,6 +231,19 @@
   <a href="https://github.com/etownson/lamest-games">Site source</a>
 </footer>
 </div>
-<script>document.getElementById('y').textContent=new Date().getFullYear();</script>
+<script>
+document.getElementById('y').textContent=new Date().getFullYear();
+// Load the YouTube player only when clicked, so the page stays light.
+document.querySelectorAll('.player[data-yt]').forEach(function(p){
+  p.querySelector('button').addEventListener('click',function(){
+    var f=document.createElement('iframe');
+    f.src='https://www.youtube-nocookie.com/embed/'+p.dataset.yt+'?autoplay=1&rel=0';
+    f.title=this.getAttribute('aria-label').replace(/^Play /,'');
+    f.allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+    f.allowFullscreen=true;
+    p.replaceChildren(f);
+  });
+});
+</script>
 </body>
 </html>

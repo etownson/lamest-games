@@ -8,6 +8,7 @@ Live at **https://etownson.github.io/lamest-games/**
 ## Games
 - [Ultra Ultralights](https://etownson.github.io/ultralight-racing/) — ultralight racing, combat, and free flight
 - [Neon Wars](https://etownson.github.io/neon-wars/) — Geometry Wars–inspired twin-stick shooter
+- [VoxelVerse](https://etownson.github.io/voxelcraft-ds/) — first-person voxel survival with a story and co-op
 
 ## Videos
 - [Hyperbolic Holdings](https://youtu.be/mhf4RhrtxsY) — satirical animated explainer
